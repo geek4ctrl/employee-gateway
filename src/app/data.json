@@ -1,0 +1,26 @@
+[
+   {
+    "id": 1,
+    "firstName": "Laurent",
+    "LastName": "Mbuyu",
+    "contactNumber": "0799930821"
+   },
+   {
+    "id": 2,
+    "firstName": "Laurence",
+    "LastName": "Mbuyu",
+    "contactNumber": "0799930822"
+   },
+   {
+    "id": 3,
+    "firstName": "Louise",
+    "LastName": "Mbuyu",
+    "contactNumber": "0799930823"
+   },
+   {
+    "id": 4,
+    "firstName": "Jeanne",
+    "LastName": "Mbuyu",
+    "contactNumber": "0799930824"
+   }
+]
