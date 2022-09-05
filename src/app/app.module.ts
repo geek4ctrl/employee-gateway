@@ -14,13 +14,15 @@ import { MatDialog, MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angu
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FieldErrorDisplayComponent } from './field-error-display/field-error-display.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    DashboardDialog
+    DashboardDialog,
+    FieldErrorDisplayComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +37,9 @@ import { FormsModule } from '@angular/forms';
     MatFormFieldModule,
 
     Ng2SearchPipeModule,
-    FormsModule
+    FormsModule,
+
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

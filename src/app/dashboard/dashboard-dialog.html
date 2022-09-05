@@ -2,12 +2,13 @@
     <h3>New Employee</h3>
 
     <div>
-        <form class="example-form">
+        <form class="example-form" [formGroup]="employeeForm" (ngSubmit)="saveEmployee()">
             <div style="display: flex;">
                 <mat-form-field class="example-full-width" appearance="fill" style="margin-right: 1rem;">
                     <mat-label>First Name</mat-label>
-                    <input matInput placeholder="First Name" value="">
+                    <input matInput placeholder="First Name" value="" formControlName="firstName">
                 </mat-form-field>
+
 
                 <mat-form-field class="example-full-width" appearance="fill">
                     <mat-label>Last Name</mat-label>

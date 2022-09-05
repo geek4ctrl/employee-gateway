@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from '../employee.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',
@@ -48,13 +49,32 @@ export class DashboardComponent implements OnInit {
   templateUrl: 'dashboard-dialog.html',
 })
 export class DashboardDialog {
+  employeeForm: any;
+  submitted = false;
+
   constructor() { }
+
+  ngOnInit() {
+    this.employeeForm = new FormGroup({
+      firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
+      lastName: new FormControl('', [Validators.required, Validators.minLength(2)]),
+      contactNumber: new FormControl('', [Validators.required, Validators.minLength(10)]),
+      emailAddress: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      dateOfBirth: new FormControl('', [Validators.required, Validators.minLength(4)]),
+      streetAddress: new FormControl('', [Validators.required, Validators.minLength(2)]),
+      city: new FormControl('', [Validators.required, Validators.minLength(2)]),
+      postalCode: new FormControl('', [Validators.required, Validators.minLength(2)]),
+      country: new FormControl('', [Validators.required, Validators.minLength(2)])
+    })
+  }
 
   onNoClick(): void {
     // this.dialogRef.close();
   }
 
   saveEmployee() {
+    this.submitted = true;
+
 
   }
 }
