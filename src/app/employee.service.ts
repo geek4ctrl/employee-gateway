@@ -6,7 +6,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class EmployeeService {
 
-  BASE_URL = 'https://dummy.restapiexample.com/api/v1/employees';
+  // BASE_URL = 'https://dummy.restapiexample.com/api/v1/employees';   // Dummy URL
+  BASE_URL = 'http://localhost:5000/api/v1/employees';                 // Real URL
 
   constructor(public httpClient: HttpClient) { }
 

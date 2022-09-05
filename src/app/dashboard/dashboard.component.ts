@@ -21,8 +21,8 @@ export class DashboardComponent implements OnInit {
 
   displayAllEmployees() {
     this.employeeService.getAllEmployees().subscribe(
-      (employees: any) => {
-        this.allEmployees = employees.data;
+      (result: any) => {
+        this.allEmployees = result.employees;
         this.totalNumberOfEmployees = this.allEmployees.length
 
         console.log('Show me all the employees: ', this.allEmployees)
