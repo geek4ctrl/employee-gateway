@@ -13,4 +13,16 @@ export class EmployeeService {
   getAllEmployees() {
     return this.httpClient.get(this.BASE_URL);
   }
+
+  saveEmployee(employee: any) {
+    return this.httpClient.post(this.BASE_URL, employee)
+  }
+
+  updateEmployee(employee: any) {
+    return this.httpClient.put(this.BASE_URL, employee)
+  }
+
+  deleteEmployee(employee: any) {
+    return this.httpClient.delete(this.BASE_URL, employee)
+  }
 }

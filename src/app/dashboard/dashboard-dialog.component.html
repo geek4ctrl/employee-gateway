@@ -1,7 +1,7 @@
 <div class="card m-3">
     <h5 class="card-header"><h3>New Employee</h3></h5>
     <div class="card-body">
-        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="registerForm" (ngSubmit)="saveEmployee()">
             <div class="form-row" style="display: flex">
                 <div class="form-group col-5">
                     <label for="">First Name</label><br>
