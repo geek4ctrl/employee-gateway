@@ -8,3 +8,9 @@
 .invalid-feedback {
     color: red;
 }
+
+label {
+    font-size: small;
+    font-weight: 500;
+    padding-bottom: 1rem;
+}
