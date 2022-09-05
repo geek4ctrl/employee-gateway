@@ -1,0 +1,10 @@
+.input-text {
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 0.4rem;
+    border: 0.3px solid grey;
+}
+
+.invalid-feedback {
+    color: red;
+}

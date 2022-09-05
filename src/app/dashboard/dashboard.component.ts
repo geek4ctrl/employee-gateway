@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from '../employee.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',
@@ -46,35 +46,46 @@ export class DashboardComponent implements OnInit {
 
 @Component({
   selector: 'dashboard-dialog',
-  templateUrl: 'dashboard-dialog.html',
+  templateUrl: 'dashboard-dialog.component.html',
+  styleUrls: ['./dashboard-dialog.component.css']
 })
 export class DashboardDialog {
-  employeeForm: any;
+  registerForm: any;
   submitted = false;
 
-  constructor() { }
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    this.employeeForm = new FormGroup({
-      firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
-      lastName: new FormControl('', [Validators.required, Validators.minLength(2)]),
-      contactNumber: new FormControl('', [Validators.required, Validators.minLength(10)]),
-      emailAddress: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      dateOfBirth: new FormControl('', [Validators.required, Validators.minLength(4)]),
-      streetAddress: new FormControl('', [Validators.required, Validators.minLength(2)]),
-      city: new FormControl('', [Validators.required, Validators.minLength(2)]),
-      postalCode: new FormControl('', [Validators.required, Validators.minLength(2)]),
-      country: new FormControl('', [Validators.required, Validators.minLength(2)])
-    })
+    this.registerForm = this.formBuilder.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      contactNumber: ['', Validators.required],
+      dateOfBirth: ['', Validators.required],
+      streetAddress: ['', Validators.required],
+      city: ['', Validators.required],
+      postalCode: ['', Validators.required],
+      country: ['', Validators.required],
+    });
   }
 
-  onNoClick(): void {
-    // this.dialogRef.close();
-  }
+  // convenience getter for easy access to form fields
+  get f() { return this.registerForm.controls; }
 
-  saveEmployee() {
+  onSubmit() {
     this.submitted = true;
 
+    // stop here if form is invalid
+    if (this.registerForm.invalid) {
+      return;
+    }
 
+    // display form values on success
+    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
+  }
+
+  onReset() {
+    this.submitted = false;
+    this.registerForm.reset();
   }
 }

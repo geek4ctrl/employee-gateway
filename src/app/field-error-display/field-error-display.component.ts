@@ -8,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class FieldErrorDisplayComponent implements OnInit {
 
   @Input() errorMessage: string = '';
-  @Input() isErrorDisplayed: boolean = false;
+  @Input() displayError: boolean = false;
 
   constructor() { }
 
