@@ -30,6 +30,10 @@ export class DashboardComponent implements OnInit {
     )
   }
 
+  showEmployee(employee: any) {
+    alert('Employee selected \n\n' + JSON.stringify(employee, null, 4));
+  }
+
   openDialog(): void {
     const dialogRef = this.dialog.open(DashboardDialog, {
       width: '700px',
