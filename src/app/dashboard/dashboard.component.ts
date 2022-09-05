@@ -30,8 +30,14 @@ export class DashboardComponent implements OnInit {
     )
   }
 
-  showEmployee(employee: any) {
-    alert('Employee selected \n\n' + JSON.stringify(employee, null, 4));
+  deleteEmployee(employeeId: any) {
+    this.employeeService.deleteEmployee(employeeId).subscribe(
+      (result: any) => {
+        console.log('Show me the result here: ', result)
+      }
+    )
+
+    location.reload();
   }
 
   openDialog(): void {
@@ -55,8 +61,9 @@ export class DashboardComponent implements OnInit {
 export class DashboardDialog {
   registerForm: any;
   submitted = false;
+  employee: any;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private employeeService: EmployeeService) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -82,7 +89,24 @@ export class DashboardDialog {
       return;
     }
 
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
+    alert('User registered successfully!');
+    this.employee = this.registerForm.value;
+
+    this.employeeService.saveEmployee(this.employee).subscribe(
+      (result: any) => {
+        console.log('Show me the result here: ', result)
+      }
+    );
+
+    location.reload();
+  }
+
+  updateEmployee(employee: any) {
+    this.employeeService.updateEmployee(employee).subscribe(
+      (result: any) => {
+        console.log('Show me the result here: ', result)
+      }
+    )
   }
 
   onReset() {

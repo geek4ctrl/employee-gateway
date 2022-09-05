@@ -23,7 +23,7 @@ export class EmployeeService {
     return this.httpClient.put(this.BASE_URL, employee)
   }
 
-  deleteEmployee(employee: any) {
-    return this.httpClient.delete(this.BASE_URL, employee)
+  deleteEmployee(employeeId: any) {
+    return this.httpClient.delete(this.BASE_URL + '/' + employeeId)
   }
 }

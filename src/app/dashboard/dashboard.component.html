@@ -1,60 +1,77 @@
-
 <div class="content">
-
-    <div class="header-content">
-        <div>
-            <h3>Employees</h3>
-            <ng-container *ngIf="totalNumberOfEmployees">
-                <div>There are {{ totalNumberOfEmployees }} employees</div>
-            </ng-container>
-            <ng-container *ngIf="!totalNumberOfEmployees">
-                <div>No employees</div>
-            </ng-container>
-        </div>
-        <div>
-
-        <div class="search-hero">
-           <input class="form-control search" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search">
-        </div>
-
-        </div>
-
-        <div>Filter by</div>
-
-        <div>
-           <button mat-raised-button (click)="openDialog()">+ New Employee</button>
-        </div>
+  <div class="header-content">
+    <div>
+      <h3>Employees</h3>
+      <ng-container *ngIf="totalNumberOfEmployees">
+        <div>There are {{ totalNumberOfEmployees }} employees</div>
+      </ng-container>
+      <ng-container *ngIf="!totalNumberOfEmployees">
+        <div>No employees</div>
+      </ng-container>
+    </div>
+    <div>
+      <div class="search-hero">
+        <input
+          class="form-control search"
+          type="text"
+          name="search"
+          [(ngModel)]="searchText"
+          autocomplete="off"
+          placeholder="Search"
+        />
+      </div>
     </div>
 
-    <ng-container *ngIf="!allEmployees">
-        <div class="empty-content">
-            <p>There is nothing here</p><br>
+    <div>Filter by</div>
 
-            <p>Create a new employee by clicking the <strong>New Employee</strong> button to get started</p>
-        </div>
-    </ng-container>
+    <div>
+      <button mat-raised-button (click)="openDialog()">+ New Employee</button>
+    </div>
+  </div>
 
-    <ng-container *ngIf="allEmployees">
-        <div class="container" style="width: 100%">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Employee Name</th>
-                            <th>Employee Salary</th>
-                            <th>Employee Age</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let employee of allEmployees | filter:searchText" (click)="showEmployee(employee)">
-                            <td>{{employee.id}}</td>
-                            <td>{{employee.firstName}}</td>
-                            <td>{{employee.lastName}}</td>
-                            <td>{{employee.contactNumber}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-        </div>
-    </ng-container>
+  <ng-container *ngIf="!allEmployees">
+    <div class="empty-content">
+      <p>There is nothing here</p>
+      <br />
 
+      <p>
+        Create a new employee by clicking the
+        <strong>New Employee</strong> button to get started
+      </p>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="allEmployees">
+    <div class="container" style="width: 100%">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Contact Number</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let employee of allEmployees | filter: searchText">
+            <td>{{ employee.id }}</td>
+            <td>{{ employee.firstName }}</td>
+            <td>{{ employee.lastName }}</td>
+            <td>{{ employee.contactNumber }}</td>
+            <td>
+              <button
+                mat-raised-button
+                color="warn"
+                (click)="deleteEmployee(employee.id)"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ng-container>
 </div>
