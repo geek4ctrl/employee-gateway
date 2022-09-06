@@ -1,6 +1,6 @@
 <div class="content">
   <div class="header-content">
-    <div>
+    <div class="smallitem center-alignment">
       <h2>Employees</h2>
       <ng-container *ngIf="totalNumberOfEmployees">
         <div>There are {{ totalNumberOfEmployees }} employees</div>
@@ -9,10 +9,11 @@
         <div>No employees</div>
       </ng-container>
     </div>
-    <div>
-      <div class="search-hero">
+
+    <div class="bigitem">
+      <div class="search-hero wide-search">
         <input
-          class="form-control search"
+          class="form-control search wide-search"
           type="text"
           name="search"
           [(ngModel)]="searchText"
@@ -22,20 +23,24 @@
       </div>
     </div>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Filter by</mat-label>
-      <mat-select #matSelect disabled>
-        <mat-option
-          *ngFor="let attribute of attributes"
-          [value]="attribute.value"
-        >
-          {{ attribute.viewValue }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div class="smallitem">
+      <mat-form-field appearance="fill">
+        <mat-label>Filter by</mat-label>
+        <mat-select #matSelect disabled>
+          <mat-option
+            *ngFor="let attribute of attributes"
+            [value]="attribute.value"
+          >
+            {{ attribute.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
 
-    <div>
-      <button mat-raised-button (click)="openDialog()">+ New Employee</button>
+    <div class="smallitem">
+      <button class="button-color" mat-raised-button (click)="openDialog()">
+        + New Employee
+      </button>
     </div>
   </div>
 
@@ -53,7 +58,7 @@
 
   <ng-container *ngIf="allEmployees">
     <div class="container" style="width: 100%">
-      <table class="table table-striped">
+      <table class="table table-striped" BORDER="0" CELLSPACING="0">
         <thead>
           <tr>
             <th>Id</th>
@@ -62,6 +67,7 @@
             <th>Contact Number</th>
             <th>Actions</th>
           </tr>
+          <br />
         </thead>
 
         <tbody>
@@ -69,20 +75,25 @@
             *ngFor="let employee of allEmployees | filter: searchText"
             (click)="showEmployee(employee)"
           >
-            <td>{{ employee.id }}</td>
+            <td>
+              <span class="circle"> {{ employee.id }} </span>
+            </td>
             <td>{{ employee.firstName }}</td>
             <td>{{ employee.lastName }}</td>
             <td>{{ employee.contactNumber }}</td>
             <td>
-              <button
-                mat-raised-button
-                color="warn"
-                (click)="deleteEmployee(employee.id)"
-              >
-                Delete
-              </button>
+              <div>
+                <mat-icon
+                  [ngStyle]="{ color: 'white' }"
+                  (click)="deleteEmployee(employee.id)"
+                  matTooltip="Delete"
+                  matTooltipPosition="above"
+                  >delete</mat-icon
+                >
+              </div>
             </td>
           </tr>
+          <br />
         </tbody>
       </table>
     </div>

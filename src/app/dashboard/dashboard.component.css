@@ -1,33 +1,32 @@
-
 .content {
-    margin: 2rem;
+  margin: 2rem;
 }
 
 .header-content {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    justify-items: flex-start;
-    align-items: flex-start
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  justify-items: flex-start;
+  align-items: flex-start
 }
 
 .main {
-    margin-top: 2rem;
+  margin-top: 2rem;
 }
 
 .main-content {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    justify-items: flex-start;
-    align-content: flex-start;
-    text-align: left;
-    background-color: grey;
-    margin-bottom: 1rem;
-    padding: 1rem;
-    border: 1px solid gray;
-    border-radius: 1rem;
-    color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  justify-items: flex-start;
+  align-content: flex-start;
+  text-align: left;
+  background-color: grey;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border: 1px solid gray;
+  border-radius: 1rem;
+  color: white;
 }
 
 .container {
@@ -39,38 +38,80 @@
 .search-hero {
   max-width: 500px;
   padding-bottom: 50px;
-  margin:auto;
+  margin: auto;
 }
 
 .form-control {
   box-shadow: 0 10px 40px 0 #B0C1D9;
 }
-.form-control::placeholder  {
+
+.form-control::placeholder {
   font-family: FontAwesome;
 }
 
 table {
   width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 15px;
 }
 
-td
-{
-    height: 50px;
-    width: 50px;
+td {
+  height: 50px;
+  width: 50px;
 }
 
-table td
-{
-    text-align: center;
-    vertical-align: middle;
+table td {
+  text-align: center;
+  vertical-align: middle;
 }
 
 .search {
-    padding: 1rem;
-    border-radius: 1rem;
-    border: 0.5px solid gray;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 0.5px solid gray;
 }
 
-.empty-content  {
-    text-align: center;
+.empty-content {
+  text-align: center;
+}
+
+.bigitem {
+  flex: 2 0 30%;
+}
+
+/* flex-grow, flex-shrink, flex-basis */
+
+.smallitem {
+  flex: 1 0 10%;
+}
+
+.center-alignment {
+  text-align: center
+}
+
+.wide-search {
+  width: -webkit-fill-available;
+}
+
+.button-color {
+  background-color: purple;
+  color: white
+}
+
+tbody tr {
+  background-color: lightgrey;
+  border-radius: 1rem;
+}
+
+.circle {
+  display: block;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  border: 2px solid purple;
+  margin: auto;
+  color: #fff;
+  line-height: 25px;
+  text-align: center;
+  color: purple;
 }
