@@ -115,3 +115,8 @@ tbody tr {
   text-align: center;
   color: purple;
 }
+
+.info {
+  font-weight: 500;
+  color: white;
+}
