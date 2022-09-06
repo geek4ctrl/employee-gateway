@@ -1,7 +1,7 @@
 <div class="content">
   <div class="header-content">
     <div>
-      <h3>Employees</h3>
+      <h2>Employees</h2>
       <ng-container *ngIf="totalNumberOfEmployees">
         <div>There are {{ totalNumberOfEmployees }} employees</div>
       </ng-container>
@@ -22,7 +22,17 @@
       </div>
     </div>
 
-    <div>Filter by</div>
+    <mat-form-field appearance="fill">
+      <mat-label>Filter by</mat-label>
+      <mat-select #matSelect disabled>
+        <mat-option
+          *ngFor="let attribute of attributes"
+          [value]="attribute.value"
+        >
+          {{ attribute.viewValue }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
     <div>
       <button mat-raised-button (click)="openDialog()">+ New Employee</button>

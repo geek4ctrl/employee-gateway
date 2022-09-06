@@ -1,7 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { EmployeeService } from '../employee.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSelect } from '@angular/material/select';
+
+interface Attribute {
+  value: string;
+  viewValue: string;
+}
 
 @Component({
   selector: 'app-dashboard',
@@ -13,10 +19,28 @@ export class DashboardComponent implements OnInit {
   totalNumberOfEmployees: number = 0;
   searchText: any = '';
 
+  attributes: Attribute[] = [
+    { value: 'year', viewValue: 'Year' },
+    { value: 'skills', viewValue: 'Skills' },
+  ];
+
   constructor(private employeeService: EmployeeService, public dialog: MatDialog) { }
+
+  @ViewChild('matSelect') matSelect: MatSelect | undefined;
+  //Reference Variable //variable Name //Type
+
+  ngAfterViewInit() {
+    this.matSelect?.valueChange.subscribe(value => {
+      this.searchText = value;
+    });
+  }
 
   ngOnInit(): void {
     this.displayAllEmployees()
+  }
+
+  changeSelection(value: any) {
+    console.log('Show me the damn value: ' + value);
   }
 
   displayAllEmployees() {
