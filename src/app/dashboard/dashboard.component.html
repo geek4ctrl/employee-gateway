@@ -65,7 +65,10 @@
         </thead>
 
         <tbody>
-          <tr *ngFor="let employee of allEmployees | filter: searchText">
+          <tr
+            *ngFor="let employee of allEmployees | filter: searchText"
+            (click)="showEmployee(employee)"
+          >
             <td>{{ employee.id }}</td>
             <td>{{ employee.firstName }}</td>
             <td>{{ employee.lastName }}</td>

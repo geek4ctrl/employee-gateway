@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { EmployeeService } from '../employee.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -27,7 +27,6 @@ export class DashboardComponent implements OnInit {
   constructor(private employeeService: EmployeeService, public dialog: MatDialog) { }
 
   @ViewChild('matSelect') matSelect: MatSelect | undefined;
-  //Reference Variable //variable Name //Type
 
   ngAfterViewInit() {
     this.matSelect?.valueChange.subscribe(value => {
@@ -39,35 +38,31 @@ export class DashboardComponent implements OnInit {
     this.displayAllEmployees()
   }
 
-  changeSelection(value: any) {
-    console.log('Show me the damn value: ' + value);
-  }
-
   displayAllEmployees() {
     this.employeeService.getAllEmployees().subscribe(
       (result: any) => {
         this.allEmployees = result.employees;
-        this.totalNumberOfEmployees = this.allEmployees.length
-
-        console.log('Show me all the employees: ', this.allEmployees)
+        this.totalNumberOfEmployees = this.allEmployees.length;
       }
     )
   }
 
+  showEmployee(employee: any) {
+    this.openDialog(true, employee);
+  }
+
   deleteEmployee(employeeId: any) {
     this.employeeService.deleteEmployee(employeeId).subscribe(
-      (result: any) => {
-        console.log('Show me the result here: ', result)
-      }
+      (result: any) => { }
     )
 
     location.reload();
   }
 
-  openDialog(): void {
+  openDialog(toUpdate = false, employee = null): void {
     const dialogRef = this.dialog.open(DashboardDialog, {
       width: '700px',
-      data: {},
+      data: { toUpdate: toUpdate, data: employee },
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -87,7 +82,10 @@ export class DashboardDialog {
   submitted = false;
   employee: any;
 
-  constructor(private formBuilder: FormBuilder, private employeeService: EmployeeService) { }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public person: any,
+    private formBuilder: FormBuilder,
+    private employeeService: EmployeeService) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -101,10 +99,34 @@ export class DashboardDialog {
       postalCode: ['', Validators.required],
       country: ['', Validators.required],
     });
+
+    if (this.person.data !== null) {
+
+      this.registerForm.patchValue({
+        firstName: this.person.data.firstName,
+        lastName: this.person.data.lastName,
+        email: this.person.data.email,
+        contactNumber: this.person.data.contactNumber,
+        dateOfBirth: this.person.data.dateOfBirth,
+        streetAddress: this.person.data.streetAddress,
+        city: this.person.data.city,
+        postalCode: this.person.data.postalCode,
+        country: this.person.data.country,
+      })
+
+    }
   }
 
   // convenience getter for easy access to form fields
   get f() { return this.registerForm.controls; }
+
+  save() {
+    if (this.person.toUpdate) {
+      this.updateEmployee(this.registerForm.value);
+    } else {
+      this.saveEmployee();
+    }
+  }
 
   saveEmployee() {
     this.submitted = true;
@@ -130,7 +152,9 @@ export class DashboardDialog {
       (result: any) => {
         console.log('Show me the result here: ', result)
       }
-    )
+    );
+
+    location.reload();
   }
 
   onReset() {
